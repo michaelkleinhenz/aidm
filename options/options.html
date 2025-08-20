@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>AI DM Extension Options</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        padding: 32px 24px;
+      }
+      h1 {
+        color: #2d3748;
+        font-size: 1.7em;
+        margin-bottom: 18px;
+        text-align: center;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #4a5568;
+        font-weight: 500;
+      }
+      input[type="text"], select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 18px;
+        border: 1px solid #cbd5e0;
+        border-radius: 4px;
+        font-size: 1em;
+        background: #f7fafc;
+      }
+      button {
+        background: #3182ce;
+        color: #fff;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 4px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: #2563eb;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 24px;
+        color: #a0aec0;
+        font-size: 0.95em;
+      }
+      /* Modal styles */
+      #welcomeModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.35);
+        z-index: 9999;
+      }
+      #welcomeModal > div {
+        background: #fff;
+        border-radius: 8px;
+        max-width: 400px;
+        margin: 80px auto;
+        padding: 32px 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        position: relative;
+      }
+      #welcomeModal h2 {
+        margin-top: 0;
+      }
+      #welcomeModal ul {
+        padding-left: 18px;
+      }
+      #welcomeModal button {
+        margin-top: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Extension Options</h1>
+      <div id="instructions" style="background:#f7fafc; border-radius:6px; padding:18px 16px; margin-bottom:22px; box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+        <h2 style="margin-top:0; font-size:1.15em; color:#2d3748;">Getting Started</h2>
+        <ul style="padding-left:18px; margin-bottom:0;">
+          <li>Enter your <b>OpenRouter API Key</b> below.</li>
+          <li>Optionally set a <b>Prompt Extra Command</b> for custom instructions.</li>
+          <li>Select your preferred <b>AI model</b>.</li>
+          <li>Click <b>Save</b> to store your settings.</li>
+          <li>Right-click on any text in your browser to use the extension!</li>
+        </ul>
+      </div>
+      <form>
+        <label for="openaiKey">OpenRouter API Key:</label>
+        <input type="text" id="openaiKey" placeholder="Enter your OpenRouter API key" />
+
+        <label for="extraPrompt">Prompt Extra Command (update this for your language):</label>
+        <input type="text" id="extraPrompt" placeholder="e.g. Please summarize:" />
+
+        <label for="modelSelect">Model:</label>
+        <select id="modelSelect">
+          <option selected value="deepseek/deepseek-r1-0528:free">deepseek/deepseek-r1-0528 (free)</option>
+          <option value="openai/gpt-4o">openai/gpt-4o</option>
+          <option value="openai/gpt-3.5-turbo">openai/gpt-3.5-turbo</option>
+          <option value="google/gemini-2.0-flash-001">google/gemini-2.0-flash-001</option>
+          <option value="google/gemini-2.5-flash">google/gemini-2.5-flash</option>
+          <option value="anthropic/claude-sonnet-4">anthropic/claude-sonnet-4</option>
+          <!-- Add more models as needed -->
+        </select>
+
+        <label for="maxTokens">Max Tokens:</label>
+        <input type="number" id="maxTokens" min="1" max="4096" placeholder="e.g. 500" style="margin-bottom: 12px;" />
+
+        <div style="height: 10px;"></div>
+        <button id="saveKeyBtn">Save</button>
+      </form>
+      <p id="status"></p>
+      <div class="footer">
+        &copy; 2024 AI DM Translation and Enhancer
+      </div>
+    </div>
+    <div id="welcomeModal">
+      <div>
+        <h2>Welcome to AI DM Translation and Enhancer!</h2>
+        <ul>
+          <li>Enter your <b>OpenRouter API Key</b> above.</li>
+          <li>Optionally set a <b>Prompt Extra Command</b> for custom instructions.</li>
+          <li>Select your preferred <b>AI model</b>.</li>
+          <li>Click <b>Save</b> to store your settings.</li>
+          <li>Right-click on any text in your browser to use the extension!</li>
+        </ul>
+        <button id="closeWelcomeBtn">Got it!</button>
+      </div>
+    </div>
+    <script src="options.js"></script>
+    <script>
+      // Show welcome modal if URL contains #welcome
+      if (window.location.hash === "#welcome") {
+        document.getElementById("welcomeModal").style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+      document.getElementById("closeWelcomeBtn")?.addEventListener("click", function() {
+        document.getElementById("welcomeModal").style.display = "none";
+        document.body.style.overflow = "";
+        window.location.hash = "";
+      });
+    </script>
+  </body>
+</html>

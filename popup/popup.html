@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        width: 500px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      #finalTextDisplay {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        font-size: 1.4em;
+        line-height: 1.4em;
+        font-family: serif;
+      }
+      button {
+        margin-top: 0;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #copyFinalTextBtn {
+        display: block;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>AI DM Translation</h1>
+    <div id="finalTextDisplay">No text copied yet.</div>
+    <button id="copyFinalTextBtn">Copy to Clipboard</button>
+    <script src="../scripts/popup.js"></script>
+  </body>
+</html>
