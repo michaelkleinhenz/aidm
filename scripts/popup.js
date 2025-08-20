@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  chrome.browserAction.setBadgeText({ text: "" });
+  chrome.action.setBadgeText({ text: "" });
   chrome.storage.local.get("finalText", (data) => {
     const text = data.finalText || "No text copied yet.";
     document.getElementById("finalTextDisplay").textContent = text;

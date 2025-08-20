@@ -2,17 +2,17 @@
   "name": "AI DM Translation and Enhancer",
   "description": "Translates and enhances PnP texts using AI. This can be used to translate and enhance texts for pen and paper roleplaying.",
   "version": "1.0",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "background": {
-    "scripts": ["scripts/background.js"],
-    "persistent": true
+    "service_worker": "scripts/background.js"
   },
   "permissions": [
     "contextMenus",
     "activeTab",
-    "storage"
+    "storage",
+    "scripting"
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup/popup.html"
   },
   "content_scripts": [

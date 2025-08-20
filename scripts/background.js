@@ -18,18 +18,20 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === "aidmContextMenu") {
     // Show spinner in popup
     chrome.storage.local.set({ finalText: "⏳ Processing..." }, () => {
-      chrome.browserAction.setBadgeText({ text: "..." });
-      chrome.browserAction.setBadgeBackgroundColor({ color: "#4688F1" });
+      chrome.action.setBadgeText({ text: "..." });
+      chrome.action.setBadgeBackgroundColor({ color: "#4688F1" });
     });
 
     const selectedText = info.selectionText || "";
     let finalText = await getOpenAIResponse(selectedText);
-    chrome.storage.local.set({ finalText }, () => {
-      chrome.tabs.executeScript(tab.id, { file: "scripts/content.js" }, () => {
-        chrome.tabs.sendMessage(tab.id, { action: "copyToClipboard", text: finalText });
+    chrome.storage.local.set({ finalText }, async () => {
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ["scripts/content.js"]
       });
-      chrome.browserAction.setBadgeText({ text: "!" });
-      chrome.browserAction.setBadgeBackgroundColor({ color: "#4688F1" });
+      chrome.tabs.sendMessage(tab.id, { action: "copyToClipboard", text: finalText });
+      chrome.action.setBadgeText({ text: "!" });
+      chrome.action.setBadgeBackgroundColor({ color: "#4688F1" });
     });
   }
 });
